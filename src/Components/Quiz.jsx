@@ -58,6 +58,7 @@ export default function Quiz() {
         setScore(0);
         setLock(false);
         setResult(false);
+        setStart(false);
     }
     
     let message = "";
@@ -137,7 +138,7 @@ export default function Quiz() {
                 </>
             )}
         </>
-        
+
         )}
     </div>
   )
