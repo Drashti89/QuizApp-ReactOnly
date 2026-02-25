@@ -9,6 +9,8 @@ export default function Quiz() {
     let [lock,setLock]= useState(false);
     let [score,setScore]= useState(0);
     let [result,setResult]= useState(false); 
+    let [start,setStart] = useState(false);
+
 
     let option1 = useRef(null);
     let option2 = useRef(null);
@@ -80,37 +82,63 @@ export default function Quiz() {
     }
 
 
+   return (
 
-    return (
-        <div className="container">
+    <div className="container">
+
+        {!start ? (
+            <>
+                <h1>Welcome to Quiz</h1>
+                <hr />
+                <h2>Test your knowledge with this quiz</h2>
+
+                <button onClick={() => setStart(true)}>
+                    Start Quiz
+                </button>
+            </>
+        ) : (
+
+        <>
             <h1>Quiz App</h1>
             <hr />
-            {result ? <></> : <><h2>
-               {index+1}. {question.questions} 
-            </h2>
-            <ul>
-                <li ref={option1} onClick={(e)=>{checkAns(e,1)}}>{question.option1}</li>
-                <li ref={option2} onClick={(e)=>{checkAns(e,2)}}>{question.option2}</li>
-                <li ref={option3} onClick={(e)=>{checkAns(e,3)}}>{question.option3}</li>
-                <li ref={option4} onClick={(e)=>{checkAns(e,4)}}>{question.option4}</li>
-            </ul>
-            <button onClick={next}>Next</button>
-            <div className="index">{index+1} of {data.length} questions</div>
-            </>}
 
-            {result ?
-                <> <h2>{message}</h2>
+            {!result ? (
+                <>
+                    <h2>
+                        {index+1}. {question.questions}
+                    </h2>
 
-                {score === 5 &&
-                    <div className="celebration">
-                        🎊 🎉 🏆 🎉 🎊
+                    <ul>
+                        <li ref={option1} onClick={(e)=>{checkAns(e,1)}}>{question.option1}</li>
+                        <li ref={option2} onClick={(e)=>{checkAns(e,2)}}>{question.option2}</li>
+                        <li ref={option3} onClick={(e)=>{checkAns(e,3)}}>{question.option3}</li>
+                        <li ref={option4} onClick={(e)=>{checkAns(e,4)}}>{question.option4}</li>
+                    </ul>
+
+                    <button onClick={next}>Next</button>
+
+                    <div className="index">
+                        {index+1} of {data.length} questions
                     </div>
-                }
+                </>
+            ) : (
+                <>
+                    <h2>{message}</h2>
 
-            <button onClick={reset}>Reset</button>
-            </> : <></>}
-           
-            
-        </div>
-    )
+                    {score === 5 && (
+                        <div className="celebration">
+                            🎊 🎉 🏆 🎉 🎊
+                        </div>
+                    )}
+
+                    <button onClick={reset}>
+                        Reset
+                    </button>
+                </>
+            )}
+        </>
+        
+        )}
+    </div>
+  )
 }
