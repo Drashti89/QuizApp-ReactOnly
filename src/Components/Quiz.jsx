@@ -56,7 +56,27 @@ export default function Quiz() {
         setScore(0);
         setLock(false);
         setResult(false);
+    }
+    
+    let message = "";
 
+    if(score === 5){
+    message = "🎉 Congratulations! You got 5 out of 5 🎉";
+    }
+    else if(score === 4){
+    message = "🔥 So Close! You got 4 out of 5";
+    }
+    else if(score === 3){
+    message = "👍 Good Progress! You got 3 out of 5";
+    }
+    else if(score === 2){
+    message = "💪 Keep it Up! You got 2 out of 5";
+    }
+    else if(score === 1){
+    message = "✨ You Can Do It Next Time! You got 1 out of 5";
+    }
+    else{
+    message = "🙂 Better Luck Next Time! You got 0 out of 5";
     }
 
 
@@ -78,7 +98,15 @@ export default function Quiz() {
             <div className="index">{index+1} of {data.length} questions</div>
             </>}
 
-            {result ?<> <h2>you scored {score} out of {data.length}</h2>
+            {result ?
+                <> <h2>{message}</h2>
+
+                {score === 5 &&
+                    <div className="celebration">
+                        🎊 🎉 🏆 🎉 🎊
+                    </div>
+                }
+
             <button onClick={reset}>Reset</button>
             </> : <></>}
            
